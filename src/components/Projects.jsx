@@ -7,29 +7,29 @@ import { motion } from "framer-motion";
 const projects = [
   {
     name: "StyleDecor",
-    description: "Modern booking system for home & ceremony decoration.",
-    tech: ["React", "Node.js", "MongoDB", "TailwindCSS"],
+    description:
+      "Modern booking system for home & ceremony decoration with payment checkout.",
+    tech: ["React", "Stripe", "Node.js", "MongoDB", "TailwindCSS"],
     image: "https://i.ibb.co/qvsD6jN/toa-heftiba-GHIL2-Yy-Oh-Dg-unsplash.jpg",
-    demo: "#",
-    github: "#",
+    demo: "https://assignment-11-f293d.web.app",
+    github: "https://github.com/shams-labib/Assignment-11-cllient.git",
   },
   {
-    name: "Task Manager",
-    description: "A full-featured task management app with authentication.",
-    tech: ["Next.js", "Node.js", "MongoDB"],
-    image:
-      "https://media.istockphoto.com/id/1492645918/photo/survey-form-concept-businessman-using-laptops-do-online-checklist-surveys-questionnaire-with.jpg",
-    demo: "#",
-    github: "#",
+    name: "Foodie Mart",
+    description:
+      "A full-featured food shop management app with authentication.",
+    tech: ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
+    image: "https://i.ibb.co.com/twt2tWcr/image.png",
+    demo: "https://foodiemart001.netlify.app",
+    github: "https://github.com/shams-labib/A-10-Client.git",
   },
   {
-    name: "E-Commerce Shop",
-    description: "Online store with cart, checkout, and payment integration.",
-    tech: ["React", "Express", "Stripe", "TailwindCSS"],
-    image:
-      "https://img.freepik.com/free-photo/black-friday-sales-sign-neon-light_23-2151833076.jpg",
-    demo: "#",
-    github: "#",
+    name: "Toy Topia",
+    description: "Online toy shop with cart, checkout and details.",
+    tech: ["React", "Express", "Firebase", "TailwindCSS"],
+    image: "https://i.ibb.co.com/1ffmVxVt/image.png",
+    demo: "https://toytopiamarket.netlify.app",
+    github: "https://github.com/shams-labib/A9-public.git",
   },
 ];
 

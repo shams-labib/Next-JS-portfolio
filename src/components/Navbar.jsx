@@ -1,14 +1,15 @@
 "use client";
 
 import React from "react";
+import { Mail, Home, Code, Toolbox } from "lucide-react"; // Lucide icons
 import { motion } from "framer-motion";
 
 const Navbar = () => {
   const links = [
-    { name: "Home", href: "#home" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "#home", icon: <Home size={18} /> },
+    { name: "Skills", href: "#skills", icon: <Toolbox size={18} /> },
+    { name: "Projects", href: "#projects", icon: <Code size={18} /> },
+    { name: "Contact", href: "#contact", icon: <Mail size={18} /> },
   ];
 
   return (
@@ -17,7 +18,7 @@ const Navbar = () => {
         {/* Logo */}
         <motion.a
           href="#home"
-          className="text-2xl font-bold"
+          className="text-2xl font-bold flex items-center gap-2"
           whileHover={{ scale: 1.1, color: "#FACC15" }}
           transition={{ type: "spring", stiffness: 300 }}
         >
@@ -30,18 +31,30 @@ const Navbar = () => {
             <motion.a
               key={link.name}
               href={link.href}
-              className="hover:text-yellow-400 transition-colors"
+              className="hover:text-yellow-400 transition-colors flex items-center gap-2"
               whileHover={{ scale: 1.08 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
+              <motion.span
+                whileHover={{ rotate: 20 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {link.icon}
+              </motion.span>
               {link.name}
             </motion.a>
           ))}
           <motion.a
             href="#contact"
-            className="btn btn-outline btn-warning text-white ml-4"
+            className="btn btn-outline btn-warning text-white ml-4 flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
           >
+            <motion.span
+              whileHover={{ rotate: 20 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Mail size={18} />
+            </motion.span>
             Hire Me
           </motion.a>
         </nav>
@@ -57,13 +70,21 @@ const Navbar = () => {
           >
             {links.map((link) => (
               <li key={link.name}>
-                <a href={link.href} className="block hover:text-yellow-400">
+                <a
+                  href={link.href}
+                  className="block hover:text-yellow-400 flex items-center gap-2"
+                >
+                  {link.icon}
                   {link.name}
                 </a>
               </li>
             ))}
             <li>
-              <a href="#contact" className="btn btn-warning btn-sm w-full mt-2">
+              <a
+                href="#contact"
+                className="btn btn-warning btn-sm w-full mt-2 flex items-center gap-2"
+              >
+                <Mail size={16} />
                 Hire Me
               </a>
             </li>

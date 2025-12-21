@@ -6,32 +6,32 @@ import { motion } from "framer-motion";
 
 const education = [
   {
-    degree: "B.Sc. in Computer Science",
-    school: "Dhaka University",
-    year: "2018 - 2022",
+    degree: "Diploma in Computer Science",
+    school: "Rangpur Ideal Institute Of Technology",
+    year: "2022 - 2026",
     icon: <BookOpen className="w-6 h-6 text-yellow-400 animate-bounce" />,
     tags: ["Web Dev", "Programming", "CS"],
   },
   {
     degree: "Fullstack Web Development Certificate",
     school: "Programming Hero",
-    year: "2022",
+    year: "2025",
     icon: <Award className="w-6 h-6 text-yellow-400 animate-pulse" />,
     tags: ["Fullstack", "React", "Node.js"],
   },
   {
-    degree: "React & Next.js Advanced Course",
-    school: "Udemy",
+    degree: "React & Next.js Basic Course",
+    school: "GP FUTURE ACADEMY",
     year: "2023",
     icon: <BookOpen className="w-6 h-6 text-yellow-400 animate-bounce" />,
     tags: ["React", "Next.js", "Frontend"],
   },
   {
-    degree: "UI/UX Design Certification",
-    school: "Coursera",
+    degree: "UI/UX Design Basic Idea",
+    school: "My Self",
     year: "2023",
     icon: <Verified className="w-6 h-6 text-yellow-400 animate-pulse" />,
-    tags: ["UI/UX", "Design", "Figma"],
+    tags: ["UI/UX", "Design", "Figma", "Picxo"],
   },
 ];
 

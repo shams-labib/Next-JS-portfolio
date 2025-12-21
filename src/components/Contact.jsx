@@ -1,16 +1,60 @@
 "use client";
 
-import React from "react";
-import { Mail, Linkedin, Twitter, Instagram } from "lucide-react";
+import React, { useRef } from "react";
+import { Mail, Linkedin, Facebook, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
+import emailjs from "emailjs-com";
+import Swal from "sweetalert2";
 
 const socialLinks = [
-  { name: "LinkedIn", icon: <Linkedin className="w-6 h-6" />, url: "#" },
-  { name: "Twitter", icon: <Twitter className="w-6 h-6" />, url: "#" },
+  {
+    name: "LinkedIn",
+    icon: <Linkedin className="w-6 h-6" />,
+    url: "https://www.linkedin.com/in/shams-al-labib",
+  },
+  {
+    name: "Facebook",
+    icon: <Facebook className="w-6 h-6" />,
+    url: "https://www.facebook.com/shamsallabib",
+  },
   { name: "Instagram", icon: <Instagram className="w-6 h-6" />, url: "#" },
 ];
 
 const Contact = () => {
+  const formRef = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_vyedps4",
+        "template_gu4xayn",
+        formRef.current,
+        "qAo87EgVJLY4cIA-A"
+      )
+      .then(
+        (result) => {
+          Swal.fire({
+            icon: "success",
+            title: "Message Sent!",
+            text: "Your message has been sent successfully.",
+            confirmButtonColor: "#FACC15", // yellow
+          });
+          formRef.current.reset();
+        },
+        (error) => {
+          console.error(error.text);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Failed to send message. Please try again.",
+            confirmButtonColor: "#F87171", // red
+          });
+        }
+      );
+  };
+
   return (
     <section
       id="contact"
@@ -48,21 +92,31 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <form className="flex flex-col gap-6">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-6"
+          >
             <motion.input
               type="text"
+              name="user_name"
               placeholder="Your Name"
+              required
               className="input input-bordered w-full bg-gray-900 border-gray-600 placeholder-gray-400 text-gray-100 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400 rounded-xl"
               whileFocus={{ scale: 1.02 }}
             />
             <motion.input
               type="email"
+              name="user_email"
               placeholder="Your Email"
+              required
               className="input input-bordered w-full bg-gray-900 border-gray-600 placeholder-gray-400 text-gray-100 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400 rounded-xl"
               whileFocus={{ scale: 1.02 }}
             />
             <motion.textarea
+              name="message"
               placeholder="Your Message"
+              required
               className="textarea textarea-bordered w-full bg-gray-900 border-gray-600 placeholder-gray-400 text-gray-100 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400 rounded-xl"
               rows={6}
               whileFocus={{ scale: 1.02 }}
@@ -88,6 +142,8 @@ const Contact = () => {
                 whileHover={{ scale: 1.3, rotate: [0, 10, -10, 0] }}
                 transition={{ type: "spring", stiffness: 300 }}
                 aria-label={link.name}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {link.icon}
               </motion.a>
