@@ -14,8 +14,7 @@ export default function RootLayout({ children }) {
         {/* Navbar */}
         <Navbar />
 
-        {/* Main content */}
-        <main className="relative z-10 min-h-screen">{children}</main>
+        <main className="min-h-screen">{children}</main>
 
         {/* Footer */}
         <Footer />

@@ -18,7 +18,7 @@ const projects = [
     description: "A full-featured task management app with authentication.",
     tech: ["Next.js", "Node.js", "MongoDB"],
     image:
-      "https://media.istockphoto.com/id/1492645918/photo/survey-form-concept-businessman-using-laptops-do-online-checklist-surveys-questionnaire-with.jpg?s=612x612&w=0&k=20&c=lqbzWDBLxqRe99kOz2GwfWDRzkVduf2BvUzn1NBGh7Q=",
+      "https://media.istockphoto.com/id/1492645918/photo/survey-form-concept-businessman-using-laptops-do-online-checklist-surveys-questionnaire-with.jpg",
     demo: "#",
     github: "#",
   },
@@ -27,11 +27,34 @@ const projects = [
     description: "Online store with cart, checkout, and payment integration.",
     tech: ["React", "Express", "Stripe", "TailwindCSS"],
     image:
-      "https://img.freepik.com/free-photo/black-friday-sales-sign-neon-light_23-2151833076.jpg?semt=ais_hybrid&w=740&q=80",
+      "https://img.freepik.com/free-photo/black-friday-sales-sign-neon-light_23-2151833076.jpg",
     demo: "#",
     github: "#",
   },
 ];
+
+/* Animation Variants */
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const card = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
 
 const Projects = () => {
   return (
@@ -40,55 +63,52 @@ const Projects = () => {
       className="py-20 bg-gray-900 text-gray-100 relative overflow-hidden"
     >
       <div className="container mx-auto px-4 md:px-20">
+        {/* Section Title */}
         <motion.h2
-          className="text-4xl md:text-5xl font-bold text-white text-center mb-12 relative z-10"
-          initial={{ opacity: 0, y: -60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-bold text-white text-center mb-12"
         >
           My Projects
         </motion.h2>
 
+        {/* Projects Grid */}
         <motion.div
-          className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 relative z-10"
+          variants={container}
           initial="hidden"
-          whileInView="visible"
+          whileInView="show"
           viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: { staggerChildren: 0.2 },
-            },
-          }}
+          className="grid sm:grid-cols-2 md:grid-cols-3 gap-8"
         >
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-2 group bg-gray-800 duration-300"
-              variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.6 }}
+              variants={card}
+              whileHover={{ y: -8 }}
+              className="relative rounded-2xl overflow-hidden bg-gray-800 shadow-xl group"
             >
               {/* Project Image */}
               <motion.img
                 src={project.image}
                 alt={project.name}
-                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-64 object-cover"
                 whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               />
 
-              {/* Default info at bottom */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-col gap-2">
+              {/* Bottom Info */}
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
                 <h3 className="text-xl font-bold text-yellow-400 flex items-center gap-2">
-                  <Code className="w-4 h-4 animate-pulse" />
+                  <Code className="w-4 h-4" />
                   {project.name}
                 </h3>
-                <p className="text-gray-300 text-sm md:text-base line-clamp-2">
+                <p className="text-gray-300 text-sm line-clamp-2">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mt-1">
+
+                <div className="flex flex-wrap gap-2 mt-2">
                   {project.tech.map((tech, idx) => (
                     <span
                       key={idx}
@@ -100,40 +120,35 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* Hover overlay for buttons */}
+              {/* Hover Overlay */}
               <motion.div
-                className="absolute inset-0 bg-black/70 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100"
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
+                className="absolute inset-0 bg-black/70 flex justify-center items-center"
               >
-                <motion.div className="flex gap-4" whileHover={{ scale: 1.05 }}>
-                  <motion.a
+                <div className="flex gap-4">
+                  <a
                     href={project.demo}
                     target="_blank"
-                    className="btn btn-primary btn-sm flex items-center gap-2 text-white hover:scale-105 transition-transform duration-300"
-                    whileHover={{ scale: 1.1 }}
+                    className="btn btn-primary btn-sm flex items-center gap-2"
                   >
-                    <ExternalLink className="w-4 h-4 animate-pulse" />
+                    <ExternalLink className="w-4 h-4" />
                     Live Demo
-                  </motion.a>
-                  <motion.a
+                  </a>
+                  <a
                     href={project.github}
                     target="_blank"
-                    className="btn btn-outline btn-primary btn-sm flex items-center gap-2 text-white hover:scale-105 transition-transform duration-300"
-                    whileHover={{ scale: 1.1 }}
+                    className="btn btn-outline btn-primary btn-sm flex items-center gap-2"
                   >
-                    <Github className="w-4 h-4 animate-spin-slow" />
+                    <Github className="w-4 h-4" />
                     GitHub
-                  </motion.a>
-                </motion.div>
+                  </a>
+                </div>
               </motion.div>
 
-              {/* Neon border glow */}
-              <motion.div
-                className="absolute inset-0 rounded-2xl border-2 border-yellow-400 opacity-0 pointer-events-none animate-pulse"
-                whileHover={{ opacity: 0.5 }}
-              />
+              {/* Neon Border */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-yellow-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none" />
             </motion.div>
           ))}
         </motion.div>
