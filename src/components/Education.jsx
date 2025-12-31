@@ -39,11 +39,11 @@ const Education = () => {
   return (
     <section
       id="education"
-      className="py-20 bg-gray-800 text-gray-100 relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-[#0a0a0a] via-[#1b003d] to-[#0a0a0a] text-gray-100 relative overflow-hidden"
     >
       <div className="container mx-auto px-4 md:px-20">
         <motion.h2
-          className="text-4xl md:text-5xl font-bold text-white text-center mb-12"
+          className="text-4xl md:text-5xl font-bold text-purple-400 text-center mb-12"
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -65,7 +65,7 @@ const Education = () => {
           {education.map((edu, idx) => (
             <motion.div
               key={idx}
-              className="bg-gray-900 rounded-2xl p-6 shadow-lg flex flex-col gap-3 hover:shadow-2xl hover:scale-105 transition-transform duration-300"
+              className="bg-white/5 rounded-2xl p-6 shadow-lg flex flex-col gap-3 hover:shadow-2xl hover:scale-105 transition-transform duration-300 border border-white/10 backdrop-blur-md"
               variants={{
                 hidden: { opacity: 0, y: 50 },
                 visible: { opacity: 1, y: 0 },
@@ -79,7 +79,9 @@ const Education = () => {
                 >
                   {edu.icon}
                 </motion.div>
-                <h3 className="text-xl font-semibold">{edu.degree}</h3>
+                <h3 className="text-xl font-semibold text-purple-400">
+                  {edu.degree}
+                </h3>
               </div>
               <span className="text-gray-400">{edu.school}</span>
               <span className="text-gray-400">{edu.year}</span>
@@ -87,7 +89,7 @@ const Education = () => {
                 {edu.tags.map((tag, i) => (
                   <motion.span
                     key={i}
-                    className="badge badge-outline badge-primary cursor-pointer hover:bg-yellow-400 hover:text-black transition-colors duration-300"
+                    className="badge badge-outline badge-purple-400 cursor-pointer hover:bg-purple-400 hover:text-black transition-colors duration-300"
                     whileHover={{ scale: 1.1, rotate: [0, 5, -5, 0] }}
                   >
                     {tag}

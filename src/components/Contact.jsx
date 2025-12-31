@@ -1,7 +1,16 @@
 "use client";
 
 import React, { useRef } from "react";
-import { Mail, Linkedin, Facebook, Instagram } from "lucide-react";
+import {
+  Mail,
+  Linkedin,
+  Facebook,
+  Instagram,
+  Phone,
+  MapPin,
+  Send,
+  MessageCircle,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
 import Swal from "sweetalert2";
@@ -9,15 +18,19 @@ import Swal from "sweetalert2";
 const socialLinks = [
   {
     name: "LinkedIn",
-    icon: <Linkedin className="w-6 h-6" />,
+    icon: <Linkedin className="w-5 h-5" />,
     url: "https://www.linkedin.com/in/shams-al-labib",
   },
   {
     name: "Facebook",
-    icon: <Facebook className="w-6 h-6" />,
+    icon: <Facebook className="w-5 h-5" />,
     url: "https://www.facebook.com/shamsallabib",
   },
-  { name: "Instagram", icon: <Instagram className="w-6 h-6" />, url: "#" },
+  {
+    name: "WhatsApp",
+    icon: <MessageCircle className="w-5 h-5" />,
+    url: "https://wa.me/8801784768887",
+  },
 ];
 
 const Contact = () => {
@@ -34,22 +47,21 @@ const Contact = () => {
         "qAo87EgVJLY4cIA-A"
       )
       .then(
-        (result) => {
+        () => {
           Swal.fire({
             icon: "success",
             title: "Message Sent!",
             text: "Your message has been sent successfully.",
-            confirmButtonColor: "#FACC15", // yellow
+            confirmButtonColor: "#fb923c",
           });
           formRef.current.reset();
         },
-        (error) => {
-          console.error(error.text);
+        () => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Failed to send message. Please try again.",
-            confirmButtonColor: "#F87171", // red
+            confirmButtonColor: "#ef4444",
           });
         }
       );
@@ -58,98 +70,290 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 overflow-hidden"
+      className="relative py-28 bg-gradient-to-br from-[#0a0a0a] via-[#1b003d] to-[#0a0a0a] text-gray-100 overflow-hidden"
     >
-      {/* Animated floating circles */}
-      <motion.div
-        className="absolute top-10 left-10 w-32 h-32 bg-yellow-400 rounded-full opacity-20 blur-3xl"
-        animate={{ y: [0, 20, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-20 w-40 h-40 bg-pink-500 rounded-full opacity-20 blur-3xl"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-      />
+      {/* Background glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(120,40,255,0.2),transparent_60%)]"></div>
 
-      <div className="container mx-auto px-4 md:px-20 relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <motion.h2
-          className="text-3xl md:text-5xl font-bold text-center mb-12"
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          Get In Touch
-        </motion.h2>
-
-        {/* Form Card */}
         <motion.div
-          className="max-w-3xl mx-auto bg-gray-800 p-10 rounded-3xl shadow-2xl border border-gray-700"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
         >
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-6"
-          >
-            <motion.input
-              type="text"
-              name="user_name"
-              placeholder="Your Name"
-              required
-              className="input input-bordered w-full bg-gray-900 border-gray-600 placeholder-gray-400 text-gray-100 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400 rounded-xl"
-              whileFocus={{ scale: 1.02 }}
-            />
-            <motion.input
-              type="email"
-              name="user_email"
-              placeholder="Your Email"
-              required
-              className="input input-bordered w-full bg-gray-900 border-gray-600 placeholder-gray-400 text-gray-100 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400 rounded-xl"
-              whileFocus={{ scale: 1.02 }}
-            />
-            <motion.textarea
-              name="message"
-              placeholder="Your Message"
-              required
-              className="textarea textarea-bordered w-full bg-gray-900 border-gray-600 placeholder-gray-400 text-gray-100 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400 rounded-xl"
-              rows={6}
-              whileFocus={{ scale: 1.02 }}
-            />
-            <motion.button
-              type="submit"
-              className="btn btn-gradient bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 rounded-xl shadow-xl flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.05, rotate: [0, 3, -3, 0] }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Mail className="w-5 h-5 animate-bounce" />
-              Send Message
-            </motion.button>
-          </form>
-
-          {/* Social Links */}
-          <div className="flex justify-center gap-6 mt-8">
-            {socialLinks.map((link, idx) => (
-              <motion.a
-                key={idx}
-                href={link.url}
-                className="text-gray-100 hover:text-yellow-400"
-                whileHover={{ scale: 1.3, rotate: [0, 10, -10, 0] }}
-                transition={{ type: "spring", stiffness: 300 }}
-                aria-label={link.name}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {link.icon}
-              </motion.a>
-            ))}
-          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-purple-400">
+            Get In Touch
+          </h2>
+          <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+            Have a project in mind or just want to chat? Let’s build something
+            epic together.
+          </p>
         </motion.div>
+
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
+          {/* LEFT INFO */}
+          <motion.div
+            className="space-y-8"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            {[
+              {
+                icon: <Mail />,
+                title: "Email",
+                value: "shamsallabib@gmail.com",
+              },
+              { icon: <Phone />, title: "Phone", value: "+880 1784768887" },
+              {
+                icon: <MapPin />,
+                title: "Location",
+                value: "Rangpur, Bangladesh",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: i * 0.12,
+                  duration: 0.7,
+                  ease: "easeOut",
+                }}
+                viewport={{ once: true }}
+                whileHover={{ y: -4 }}
+                className="
+        group
+        relative
+        overflow-hidden
+        rounded-2xl
+        border
+        border-white/10
+        bg-gradient-to-br
+        from-white/[0.08]
+        to-white/[0.02]
+        backdrop-blur-xl
+        p-6
+        transition-all
+        duration-300
+        hover:border-purple-400/40
+        hover:shadow-lg
+        hover:shadow-purple-500/10
+      "
+              >
+                {/* subtle glow */}
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.15),transparent_60%)]" />
+
+                <div className="relative flex items-center gap-5">
+                  {/* icon */}
+                  <div
+                    className="
+            grid
+            place-items-center
+            h-12
+            w-12
+            rounded-xl
+            bg-purple-400/15
+            text-purple-400
+            transition
+            group-hover:scale-110
+            group-hover:bg-purple-400/25
+          "
+                  >
+                    {item.icon}
+                  </div>
+
+                  {/* text */}
+                  <div className="flex-1">
+                    <p className="text-xs uppercase tracking-widest text-gray-400">
+                      {item.title}
+                    </p>
+                    <p className="mt-1 text-sm md:text-base font-semibold text-gray-100">
+                      {item.value}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+
+            {/* SOCIAL */}
+            <div className="pt-8 border-t border-white/10">
+              <p className="mb-4 text-sm uppercase tracking-widest text-gray-400">
+                Connect With Me
+              </p>
+
+              <div className="flex gap-4">
+                {socialLinks.map((link, i) => (
+                  <motion.a
+                    key={i}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -3, scale: 1.12 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 260 }}
+                    className="
+            grid
+            place-items-center
+            h-11
+            w-11
+            rounded-xl
+            border
+            border-white/10
+            bg-white/5
+            backdrop-blur-md
+            text-gray-200
+            hover:text-purple-400
+            hover:border-purple-400/40
+            hover:bg-purple-400/10
+            transition-all
+          "
+                  >
+                    {link.icon}
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* RIGHT FORM */}
+          <motion.div
+            className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+              {/* NAME */}
+              <div className="relative group">
+                <input
+                  type="text"
+                  name="user_name"
+                  placeholder="Your Name"
+                  required
+                  className="
+        w-full
+        rounded-xl
+        bg-white/5
+        px-4
+        py-3
+        text-gray-100
+        placeholder:text-gray-400/60
+        border
+        border-white/10
+        backdrop-blur-md
+
+        focus:outline-none
+        focus:border-purple-400/60
+        focus:bg-white/10
+        focus:ring-2
+        focus:ring-purple-400/20
+
+        transition-all
+        duration-300
+      "
+                />
+                {/* glow */}
+                <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/5 group-focus-within:ring-purple-400/30 transition"></span>
+              </div>
+
+              {/* EMAIL */}
+              <div className="relative group">
+                <input
+                  type="email"
+                  name="user_email"
+                  placeholder="Your Email"
+                  required
+                  className="
+        w-full
+        rounded-xl
+        bg-white/5
+        px-4
+        py-3
+        text-gray-100
+        placeholder:text-gray-400/60
+        border
+        border-white/10
+        backdrop-blur-md
+
+        focus:outline-none
+        focus:border-purple-400/60
+        focus:bg-white/10
+        focus:ring-2
+        focus:ring-purple-400/20
+
+        transition-all
+        duration-300
+      "
+                />
+                <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/5 group-focus-within:ring-purple-400/30 transition"></span>
+              </div>
+
+              {/* MESSAGE */}
+              <div className="relative group">
+                <textarea
+                  name="message"
+                  rows={5}
+                  placeholder="Your Message"
+                  required
+                  className="
+        w-full
+        rounded-xl
+        bg-white/5
+        px-4
+        py-3
+        text-gray-100
+        placeholder:text-gray-400/60
+        border
+        border-white/10
+        backdrop-blur-md
+        resize-none
+
+        focus:outline-none
+        focus:border-purple-400/60
+        focus:bg-white/10
+        focus:ring-2
+        focus:ring-purple-400/20
+
+        transition-all
+        duration-300
+      "
+                />
+                <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/5 group-focus-within:ring-purple-400/30 transition"></span>
+              </div>
+
+              {/* BUTTON */}
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 220 }}
+                className="
+      btn
+      w-full
+      rounded-xl
+      bg-gradient-to-r
+      from-purple-500
+      to-pink-500
+      text-black
+      font-semibold
+      shadow-lg
+      shadow-purple-500/30
+      hover:shadow-purple-500/60
+      transition-all
+    "
+              >
+                <Send className="w-4 h-4 mr-2" />
+                Send Message
+              </motion.button>
+            </form>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -32,10 +32,13 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 bg-gray-900 text-gray-100">
+    <section
+      id="experience"
+      className="py-20 bg-gradient-to-br from-[#0a0a0a] via-[#1b003d] to-[#0a0a0a] text-gray-100 relative overflow-hidden"
+    >
       <div className="container mx-auto px-4 md:px-20">
         <motion.h2
-          className="text-4xl md:text-5xl font-bold text-white text-center mb-12"
+          className="text-4xl md:text-5xl font-bold text-purple-400 text-center mb-12"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -43,7 +46,7 @@ const Experience = () => {
           Experience & Learning
         </motion.h2>
 
-        <div className="relative border-l-2 border-yellow-400 ml-4 md:ml-20">
+        <div className="relative border-l-2 border-purple-400 ml-4 md:ml-20">
           {experiences.map((exp, idx) => (
             <motion.div
               key={idx}
@@ -54,8 +57,8 @@ const Experience = () => {
               transition={{ duration: 0.6, delay: idx * 0.3 }}
             >
               {/* Timeline Dot */}
-              <div className="absolute -left-6 top-0 w-5 h-5 rounded-full bg-yellow-400 animate-pulse border-2 border-gray-900 flex items-center justify-center">
-                <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
+              <div className="absolute -left-6 top-0 w-5 h-5 rounded-full bg-purple-400 animate-pulse border-2 border-[#0a0a0a] flex items-center justify-center">
+                <div className="w-2 h-2 bg-[#0a0a0a] rounded-full"></div>
               </div>
 
               {/* Icon & Role */}
@@ -63,9 +66,11 @@ const Experience = () => {
                 {exp.icon ? (
                   exp.icon
                 ) : (
-                  <Briefcase className="w-5 h-5 text-yellow-400" />
+                  <Briefcase className="w-5 h-5 text-purple-400" />
                 )}
-                <h3 className="text-2xl font-semibold">{exp.role}</h3>
+                <h3 className="text-2xl font-semibold text-purple-400">
+                  {exp.role}
+                </h3>
               </div>
 
               {/* Company & Duration */}

@@ -60,7 +60,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-20 bg-gray-900 text-gray-100 relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-[#0a0a0a] via-[#1b003d] to-[#0a0a0a] text-gray-100 relative overflow-hidden"
     >
       <div className="container mx-auto px-4 md:px-20">
         {/* Section Title */}
@@ -69,7 +69,7 @@ const Projects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-white text-center mb-12"
+          className="text-4xl md:text-5xl font-bold text-purple-400 text-center mb-12"
         >
           My Projects
         </motion.h2>
@@ -87,7 +87,7 @@ const Projects = () => {
               key={index}
               variants={card}
               whileHover={{ y: -8 }}
-              className="relative rounded-2xl overflow-hidden bg-gray-800 shadow-xl group"
+              className="relative rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md shadow-xl group border border-white/10"
             >
               {/* Project Image */}
               <motion.img
@@ -100,7 +100,7 @@ const Projects = () => {
 
               {/* Bottom Info */}
               <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
-                <h3 className="text-xl font-bold text-yellow-400 flex items-center gap-2">
+                <h3 className="text-xl font-bold text-purple-400 flex items-center gap-2">
                   <Code className="w-4 h-4" />
                   {project.name}
                 </h3>
@@ -112,7 +112,7 @@ const Projects = () => {
                   {project.tech.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="bg-yellow-400 text-black px-2 py-1 rounded-full text-xs font-medium"
+                      className="bg-purple-400 text-black px-2 py-1 rounded-full text-xs font-medium"
                     >
                       {tech}
                     </span>
@@ -148,7 +148,7 @@ const Projects = () => {
               </motion.div>
 
               {/* Neon Border */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-yellow-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl border-2 border-purple-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none" />
             </motion.div>
           ))}
         </motion.div>

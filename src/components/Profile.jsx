@@ -1,108 +1,199 @@
 "use client";
 
-import React from "react";
-import { ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { Download, Linkedin, Github } from "lucide-react";
 
-const Profile = () => {
+export default function Profile() {
   return (
     <section
-      id="home"
-      className="relative w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center overflow-hidden pt-16"
+      className="
+        relative
+        bg-[#0a0a0a]
+        overflow-hidden
+        min-h-[90vh]
+        lg:min-h-screen
+        flex
+        items-center
+      "
     >
-      {/* Animated Floating Shapes */}
-      <motion.div
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-10 left-10 w-24 h-24 bg-yellow-400 rounded-full opacity-20 blur-3xl"
-      />
+      {/* Background Neon Glows */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/30 via-pink-500/10 to-blue-400/5 animate-pulse-slow pointer-events-none"></div>
+      <div className="absolute top-20 left-10 w-60 h-60 bg-purple-500/20 rounded-full blur-3xl animate-ping-slow"></div>
+      <div className="absolute bottom-10 right-20 w-80 h-80 bg-pink-500/20 rounded-full blur-3xl animate-ping-slow"></div>
 
-      <motion.div
-        animate={{ y: [0, 25, 0], x: [0, 25, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-20 right-20 w-32 h-32 bg-pink-500 rounded-full opacity-20 blur-3xl"
-      />
-
-      <div className="container mx-auto px-4 md:px-20 flex flex-col md:flex-row items-center justify-center gap-12 relative z-10">
-        {/* Profile Image */}
+      {/* CONTENT */}
+      <div
+        className="
+          relative
+          w-full
+          max-w-7xl
+          mx-auto
+          px-6
+          py-24
+          lg:py-0
+          grid
+          lg:grid-cols-2
+          gap-16
+          items-center
+        "
+      >
+        {/* LEFT */}
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1, type: "spring", stiffness: 120 }}
-          className="w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 flex justify-center md:justify-start flex-shrink-0"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="
+    space-y-6
+    order-2
+    lg:order-1
+  "
         >
-          <motion.img
-            src="/person.png"
-            alt="Shams"
-            className="rounded-full w-full h-full object-cover shadow-2xl"
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            transition={{ type: "spring", stiffness: 150 }}
-          />
+          <p className="text-sm tracking-widest text-purple-400 uppercase animate-pulse-slow">
+            Welcome to my portfolio
+          </p>
+
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white drop-shadow-lg">
+            Hi, I'm <br />
+            <span className="text-purple-400 glow-neon animate-pulse-slow">
+              Shams All Labib
+            </span>
+          </h1>
+
+          <h2 className="text-xl font-medium text-gray-300/80 drop-shadow-md">
+            Frontend & Full-Stack Developer
+          </h2>
+
+          <p className="max-w-xl text-gray-300/70 leading-relaxed">
+            Crafting immersive web experiences with neon magic. Strong
+            foundation in frontend, expanding into backend and APIs.
+          </p>
+
+          <div className="flex items-center gap-4 pt-4">
+            <a
+              href="/resume.pdf"
+              className="
+                btn
+                bg-purple-400
+                text-black
+                font-semibold
+                hover:bg-purple-500
+                shadow-lg
+                hover:shadow-purple-500/50
+                transition-all
+                duration-300
+              "
+            >
+              <Download size={18} />
+              Download Resume
+            </a>
+
+            <a
+              href="#"
+              className="
+                btn
+                btn-outline
+                border-purple-400
+                text-purple-400
+                btn-square
+                hover:bg-purple-400/20
+                hover:scale-110
+                transition-all
+                duration-300
+              "
+            >
+              <Github size={18} />
+            </a>
+
+            <a
+              href="#"
+              className="
+                btn
+                btn-outline
+                border-purple-400
+                text-purple-400
+                btn-square
+                hover:bg-purple-400/20
+                hover:scale-110
+                transition-all
+                duration-300
+              "
+            >
+              <Linkedin size={18} />
+            </a>
+          </div>
         </motion.div>
 
-        {/* Text Content */}
+        {/* RIGHT */}
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="text-center md:text-left max-w-3xl space-y-6"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="
+    relative
+    flex
+    justify-center
+    lg:justify-end
+    order-1
+    lg:order-2
+  "
         >
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white"
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            Hi, I&apos;m <span className="text-yellow-400">Shams</span>
-          </motion.h1>
+          <div className="relative">
+            {/* Glow Rings */}
+            <div className="absolute -inset-6 rounded-full blur-3xl bg-purple-400/30 animate-pulse-slow"></div>
+            <div className="absolute -inset-10 rounded-full blur-3xl bg-pink-400/20 animate-pulse-slower"></div>
+            <div className="absolute -inset-14 rounded-full blur-2xl bg-blue-400/10 animate-pulse-slower"></div>
 
-          <motion.p
-            className="text-lg sm:text-xl md:text-2xl text-gray-300"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            I’m a passionate Full-Stack Developer specializing in React,
-            Next.js, and Node.js. I build modern, responsive, and scalable web
-            applications with clean code and smooth user experiences.
-          </motion.p>
+            {/* Profile Image */}
+            <div className="relative rounded-full border-4 border-purple-400/60 p-2 bg-[#0a0a0a] shadow-lg shadow-purple-500/30">
+              <Image
+                src="/profile.jpg"
+                alt="Profile"
+                width={280}
+                height={280}
+                priority
+                className="
+                  rounded-full
+                  object-cover
+                  md:w-[300px] md:h-[300px]
+                  lg:w-[340px] lg:h-[340px]
+                "
+              />
+            </div>
 
-          {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row justify-center md:justify-start gap-4 pt-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-          >
-            <motion.a
-              href="#contact"
-              className="btn btn-primary px-8 py-3 rounded-full shadow-lg"
-              whileHover={{ scale: 1.05, y: -2 }}
+            {/* Badge */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0.8 }}
+              animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.8, 1, 0.8] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="
+                absolute
+                bottom-6
+                right-6
+                px-3
+                py-2
+                text-xs
+                font-bold
+                rounded-md
+                shadow-lg
+                backdrop-blur-sm
+                bg-gradient-to-r
+                from-purple-400
+                to-blue-400
+              "
             >
-              Hire Me
-            </motion.a>
-
-            <motion.a
-              href="#projects"
-              className="btn btn-outline btn-primary px-8 py-3 rounded-full shadow-lg"
-              whileHover={{ scale: 1.05, y: -2 }}
-            >
-              View Projects
-            </motion.a>
-          </motion.div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            className="flex justify-center md:justify-start pt-8"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ArrowDown className="w-6 h-6 text-yellow-400" />
-          </motion.div>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-yellow-300">
+                Available for work
+              </span>
+            </motion.div>
+          </div>
         </motion.div>
+      </div>
+
+      {/* Particle Overlay */}
+      <div className="absolute inset-0 pointer-events-none">
+        <canvas className="w-full h-full" />
       </div>
     </section>
   );
-};
-
-export default Profile;
+}

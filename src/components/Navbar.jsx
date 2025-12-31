@@ -1,97 +1,140 @@
 "use client";
 
-import React from "react";
-import { Mail, Home, Code, Toolbox } from "lucide-react"; // Lucide icons
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { Mail, Home, Code, Toolbox, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const links = [
+  { name: "Home", id: "home", icon: Home },
+  { name: "Skills", id: "skills", icon: Toolbox },
+  { name: "Projects", id: "projects", icon: Code },
+  { name: "Contact", id: "contact", icon: Mail },
+];
 
 const Navbar = () => {
-  const links = [
-    { name: "Home", href: "#home", icon: <Home size={18} /> },
-    { name: "Skills", href: "#skills", icon: <Toolbox size={18} /> },
-    { name: "Projects", href: "#projects", icon: <Code size={18} /> },
-    { name: "Contact", href: "#contact", icon: <Mail size={18} /> },
-  ];
+  const [active, setActive] = useState("home");
+  const [open, setOpen] = useState(false);
+
+  const handleScroll = (id) => {
+    setActive(id);
+    setOpen(false);
+
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <header className="sticky top-0 z-40 bg-black/40 backdrop-blur-md shadow-md">
-      <div className="container mx-auto px-4 md:px-8 py-4 flex items-center justify-between text-white">
-        {/* Logo */}
-        <motion.a
-          href="#home"
-          className="text-2xl font-bold flex items-center gap-2"
-          whileHover={{ scale: 1.1, color: "#FACC15" }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          Shams
-        </motion.a>
+    <>
+      {/* NAVBAR */}
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0a0a0a]/70 border-b border-purple-400/20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between h-16">
+            {/* LOGO */}
+            <span className="text-xl font-bold text-purple-400">
+              Shams Al Labib
+            </span>
 
-        {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {links.map((link) => (
-            <motion.a
-              key={link.name}
-              href={link.href}
-              className="hover:text-yellow-400 transition-colors flex items-center gap-2"
-              whileHover={{ scale: 1.08 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.span
-                whileHover={{ rotate: 20 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                {link.icon}
-              </motion.span>
-              {link.name}
-            </motion.a>
-          ))}
-          <motion.a
-            href="#contact"
-            className="btn btn-outline btn-warning text-white ml-4 flex items-center gap-2"
-            whileHover={{ scale: 1.05 }}
-          >
-            <motion.span
-              whileHover={{ rotate: 20 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Mail size={18} />
-            </motion.span>
-            Hire Me
-          </motion.a>
-        </nav>
-
-        {/* Mobile Menu */}
-        <div className="md:hidden dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost text-xl">
-            ☰
-          </label>
-          <ul
-            tabIndex={0}
-            className="dropdown-content mt-3 p-4 shadow bg-black/90 rounded-box w-52 space-y-3"
-          >
-            {links.map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  className="block hover:text-yellow-400 flex items-center gap-2"
+            {/* DESKTOP NAV */}
+            <nav className="hidden md:flex items-center gap-2 relative">
+              {links.map(({ name, id, icon: Icon }) => (
+                <button
+                  key={id}
+                  onClick={() => handleScroll(id)}
+                  className="relative px-4 py-2 text-sm font-medium flex items-center gap-2"
                 >
-                  {link.icon}
-                  {link.name}
-                </a>
-              </li>
-            ))}
-            <li>
-              <a
-                href="#contact"
-                className="btn btn-warning btn-sm w-full mt-2 flex items-center gap-2"
+                  {active === id && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full bg-purple-400/15"
+                    />
+                  )}
+                  <span
+                    className={`relative z-10 flex items-center gap-2 ${
+                      active === id ? "text-purple-400" : "text-gray-300/80"
+                    }`}
+                  >
+                    <Icon size={16} />
+                    {name}
+                  </span>
+                </button>
+              ))}
+
+              <button
+                onClick={() => handleScroll("contact")}
+                className="ml-3 btn bg-purple-400 text-black btn-sm font-semibold"
               >
-                <Mail size={16} />
                 Hire Me
-              </a>
-            </li>
-          </ul>
+              </button>
+            </nav>
+
+            {/* MOBILE MENU ICON */}
+            <button
+              onClick={() => setOpen(true)}
+              className="md:hidden text-purple-400"
+            >
+              <Menu size={26} />
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* MOBILE OVERLAY */}
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* BACKDROP */}
+            <motion.div
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 bg-black/60 z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+
+            {/* SLIDE MENU */}
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 260, damping: 25 }}
+              className="fixed right-0 top-0 h-full w-[80%] max-w-sm z-50
+                         bg-gradient-to-b from-[#120a1f] to-black
+                         border-l border-purple-400/20 p-6"
+            >
+              {/* HEADER */}
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-lg font-semibold text-purple-400">
+                  Shams Al Labib
+                </h2>
+                <button onClick={() => setOpen(false)}>
+                  <X className="text-gray-300" />
+                </button>
+              </div>
+
+              {/* LINKS */}
+              <nav className="space-y-3">
+                {links.map(({ name, id }) => (
+                  <button
+                    key={id}
+                    onClick={() => handleScroll(id)}
+                    className={`w-full text-left px-4 py-3 rounded-lg text-sm
+                      ${
+                        active === id
+                          ? "bg-purple-400/15 text-purple-400"
+                          : "text-gray-300 hover:bg-white/5"
+                      }`}
+                  >
+                    {name}
+                  </button>
+                ))}
+              </nav>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
