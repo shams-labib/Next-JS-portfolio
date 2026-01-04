@@ -1,13 +1,22 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Home, Code, Toolbox, Menu, X } from "lucide-react";
+import {
+  Mail,
+  Home,
+  Code,
+  Toolbox,
+  Menu,
+  X,
+  PersonStanding,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
   { name: "Home", id: "home", icon: Home },
   { name: "Skills", id: "skills", icon: Toolbox },
   { name: "Projects", id: "projects", icon: Code },
+  { name: "About Me", id: "about", icon: PersonStanding },
   { name: "Contact", id: "contact", icon: Mail },
 ];
 

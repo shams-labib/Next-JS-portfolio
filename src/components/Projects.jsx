@@ -20,7 +20,7 @@ const projects = [
       "A full-featured food shop management app with authentication.",
     tech: ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
     image: "https://i.ibb.co.com/twt2tWcr/image.png",
-    demo: "https://foodiemart001.netlify.app",
+    demo: "https://assignemnt-10-8c38a.web.app",
     github: "https://github.com/shams-labib/A-10-Client.git",
   },
   {
