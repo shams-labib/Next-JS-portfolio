@@ -1,8 +1,21 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { ExternalLink, Github, Code } from "lucide-react";
-import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+// GLOBAL SMOOTH DEFAULTS
+gsap.defaults({
+  ease: "power4.out",
+  duration: 1,
+});
+
+ScrollTrigger.config({
+  ignoreMobileResize: true,
+});
 
 const projects = [
   {
@@ -33,72 +46,71 @@ const projects = [
   },
 ];
 
-/* Animation Variants */
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const card = {
-  hidden: { opacity: 0, y: 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
-
 const Projects = () => {
+  const sectionRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // SECTION TITLE
+      gsap.from(".projects-title", {
+        y: 60,
+        opacity: 0,
+        duration: 1.3,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+      });
+
+      // PROJECT CARDS
+      gsap.from(cardsRef.current, {
+        y: 90,
+        opacity: 0,
+        scale: 0.95,
+        stagger: 0.2,
+        duration: 1.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="projects"
       className="py-20 bg-gradient-to-br from-[#0a0a0a] via-[#1b003d] to-[#0a0a0a] text-gray-100 relative overflow-hidden"
     >
       <div className="container mx-auto px-4 md:px-20">
-        {/* Section Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-purple-400 text-center mb-12"
-        >
+        {/* TITLE */}
+        <h2 className="projects-title text-4xl md:text-5xl font-bold text-purple-400 text-center mb-12">
           My Projects
-        </motion.h2>
+        </h2>
 
-        {/* Projects Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid sm:grid-cols-2 md:grid-cols-3 gap-8"
-        >
+        {/* GRID */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <motion.div
+            <div
               key={index}
-              variants={card}
-              whileHover={{ y: -8 }}
-              className="relative rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md shadow-xl group border border-white/10"
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="relative rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md shadow-xl group border border-white/10
+              will-change-transform transition-transform duration-500 hover:-translate-y-3"
             >
-              {/* Project Image */}
-              <motion.img
+              {/* IMAGE */}
+              <img
                 src={project.image}
                 alt={project.name}
-                className="w-full h-64 object-cover"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full h-64 object-cover will-change-transform transition-transform duration-700 ease-out group-hover:scale-105"
               />
 
-              {/* Bottom Info */}
+              {/* INFO */}
               <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
                 <h3 className="text-xl font-bold text-purple-400 flex items-center gap-2">
                   <Code className="w-4 h-4" />
@@ -120,13 +132,8 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* Hover Overlay */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-0 bg-black/70 flex justify-center items-center"
-              >
+              {/* HOVER OVERLAY */}
+              <div className="absolute inset-0 bg-black/70 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="flex gap-4">
                   <a
                     href={project.demo}
@@ -145,13 +152,13 @@ const Projects = () => {
                     GitHub
                   </a>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* Neon Border */}
+              {/* NEON BORDER */}
               <div className="absolute inset-0 rounded-2xl border-2 border-purple-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none" />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
