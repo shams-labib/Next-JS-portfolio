@@ -1,14 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, Github, Linkedin, ArrowUp } from "lucide-react";
+import { Mail, Github, Linkedin } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <footer className="relative bg-gradient-to-r from-[#0f0f0f] via-[#1a003d] to-[#0f0f0f] text-gray-300">
@@ -71,15 +67,6 @@ export default function Footer() {
           All Rights Reserved
         </p>
       </div>
-
-      {/* Scroll To Top */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 btn btn-circle bg-purple-400 text-black hover:bg-pink-500 shadow-lg"
-        aria-label="Scroll to top"
-      >
-        <ArrowUp className="w-5 h-5" />
-      </button>
     </footer>
   );
 }

@@ -1,22 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ExternalLink, Github, Code } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// GLOBAL SMOOTH DEFAULTS
-gsap.defaults({
-  ease: "power4.out",
-  duration: 1,
-});
-
-ScrollTrigger.config({
-  ignoreMobileResize: true,
-});
-
+/* -------------------- DATA -------------------- */
 const projects = [
   {
     name: "StyleDecor",
@@ -46,117 +37,137 @@ const projects = [
   },
 ];
 
-const Projects = () => {
-  const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
+/* -------------------- CARD -------------------- */
+const ProjectCard = ({ project }) => {
+  const cardRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // SECTION TITLE
-      gsap.from(".projects-title", {
-        y: 60,
-        opacity: 0,
-        duration: 1.3,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 85%",
-        },
-      });
+    const card = cardRef.current;
 
-      // PROJECT CARDS
-      gsap.from(cardsRef.current, {
-        y: 90,
+    const hoverTl = gsap.timeline({ paused: true });
+    hoverTl.to(card, {
+      y: -8,
+      scale: 1.03,
+      duration: 0.35,
+      ease: "power3.out",
+    });
+
+    const enter = () => hoverTl.play();
+    const leave = () => hoverTl.reverse();
+
+    card.addEventListener("mouseenter", enter);
+    card.addEventListener("mouseleave", leave);
+
+    return () => {
+      card.removeEventListener("mouseenter", enter);
+      card.removeEventListener("mouseleave", leave);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      className="project-card relative rounded-2xl bg-[#0b0b0f] border border-white/10 overflow-hidden will-change-transform"
+    >
+      {/* Image */}
+      <div className="relative h-56 overflow-hidden">
+        <img
+          src={project.image}
+          alt={project.name}
+          loading="lazy"
+          className="h-full w-full object-cover transition duration-700"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="p-5 space-y-3">
+        <h3 className="text-xl font-semibold text-white">{project.name}</h3>
+
+        <p className="text-sm text-gray-400 line-clamp-2">
+          {project.description}
+        </p>
+
+        {/* Tech */}
+        <div className="flex flex-wrap gap-2 pt-2">
+          {project.tech.map((t, i) => (
+            <span
+              key={i}
+              className="text-xs px-2 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Actions */}
+      <div className="flex justify-between items-center px-5 py-4 border-t border-white/10 bg-black/40 backdrop-blur">
+        <a
+          href={project.demo}
+          target="_blank"
+          className="text-sm flex items-center gap-1 text-purple-400 hover:text-purple-300"
+        >
+          <ExternalLink size={16} /> Live
+        </a>
+
+        <a
+          href={project.github}
+          target="_blank"
+          className="text-sm flex items-center gap-1 text-gray-400 hover:text-white"
+        >
+          <Github size={16} /> Code
+        </a>
+      </div>
+
+      {/* Glow */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 transition shadow-[0_0_70px_-15px_rgba(168,85,247,0.6)]" />
+    </div>
+  );
+};
+
+/* -------------------- SECTION -------------------- */
+const Projects = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      ".project-card",
+      {
         opacity: 0,
+        y: 80,
         scale: 0.95,
-        stagger: 0.2,
-        duration: 1.2,
+        filter: "blur(8px)",
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        duration: 1,
         ease: "power4.out",
+        stagger: 0.15,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: "top 75%",
         },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
+      }
+    );
   }, []);
 
   return (
     <section
       ref={sectionRef}
       id="projects"
-      className="py-20 bg-gradient-to-br from-[#0a0a0a] via-[#1b003d] to-[#0a0a0a] text-gray-100 relative overflow-hidden"
+      className="py-24 bg-gradient-to-br from-black via-[#12002b] to-black"
     >
-      <div className="container mx-auto px-4 md:px-20">
-        {/* TITLE */}
-        <h2 className="projects-title text-4xl md:text-5xl font-bold text-purple-400 text-center mb-12">
-          My Projects
+      <div className="max-w-7xl mx-auto px-6">
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-purple-400 mb-14">
+          Top Projects
         </h2>
 
-        {/* GRID */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
-              className="relative rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md shadow-xl group border border-white/10
-              will-change-transform transition-transform duration-500 hover:-translate-y-3"
-            >
-              {/* IMAGE */}
-              <img
-                src={project.image}
-                alt={project.name}
-                className="w-full h-64 object-cover will-change-transform transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-
-              {/* INFO */}
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
-                <h3 className="text-xl font-bold text-purple-400 flex items-center gap-2">
-                  <Code className="w-4 h-4" />
-                  {project.name}
-                </h3>
-                <p className="text-gray-300 text-sm line-clamp-2">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {project.tech.map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="bg-purple-400 text-black px-2 py-1 rounded-full text-xs font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* HOVER OVERLAY */}
-              <div className="absolute inset-0 bg-black/70 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="flex gap-4">
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    className="btn btn-primary btn-sm flex items-center gap-2"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Live Demo
-                  </a>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    className="btn btn-outline btn-primary btn-sm flex items-center gap-2"
-                  >
-                    <Github className="w-4 h-4" />
-                    GitHub
-                  </a>
-                </div>
-              </div>
-
-              {/* NEON BORDER */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-purple-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none" />
-            </div>
+        <div className="grid md:grid-cols-3 gap-8">
+          {projects.map((p, i) => (
+            <ProjectCard key={i} project={p} />
           ))}
         </div>
       </div>

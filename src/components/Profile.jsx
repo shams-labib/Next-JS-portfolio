@@ -1,19 +1,41 @@
 "use client";
 
-import { motion } from "framer-motion";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Download, Linkedin, Github } from "lucide-react";
+import gsap from "gsap";
 
 export default function Profile() {
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
+
   // ✅ Resume Download Handler
   const handleResumeDownload = () => {
     const link = document.createElement("a");
-    link.href = "/resume.pdf"; // public folder file
+    link.href = "/resume.pdf";
     link.download = "Shams_All_Labib_Resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      defaults: { ease: "power4.out", duration: 1 },
+    });
+
+    tl.from(leftRef.current, {
+      opacity: 0,
+      y: 60,
+    }).from(
+      rightRef.current,
+      {
+        opacity: 0,
+        scale: 0.85,
+      },
+      "-=0.6"
+    );
+  }, []);
 
   return (
     <section
@@ -35,12 +57,7 @@ export default function Profile() {
       {/* CONTENT */}
       <div className="relative w-full max-w-7xl mx-auto px-6 py-24 lg:py-0 grid lg:grid-cols-2 gap-16 items-center">
         {/* LEFT */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-6 order-2 lg:order-1"
-        >
+        <div ref={leftRef} className="space-y-6 order-2 lg:order-1">
           <p className="text-sm tracking-widest text-purple-400 uppercase animate-pulse-slow">
             Welcome to my portfolio
           </p>
@@ -61,10 +78,8 @@ export default function Profile() {
 
           {/* ACTION BUTTONS */}
           <div className="flex items-center gap-4 pt-4">
-            {/* ✅ DOWNLOAD BUTTON */}
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
+            {/* DOWNLOAD */}
+            <button
               onClick={handleResumeDownload}
               className="
                 btn
@@ -79,11 +94,13 @@ export default function Profile() {
                 flex
                 items-center
                 gap-2
+                hover:scale-110
+                active:scale-95
               "
             >
               <Download size={18} />
               Download Resume
-            </motion.button>
+            </button>
 
             {/* SOCIALS */}
             <a
@@ -102,13 +119,11 @@ export default function Profile() {
               <Linkedin size={18} />
             </a>
           </div>
-        </motion.div>
+        </div>
 
         {/* RIGHT */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
+        <div
+          ref={rightRef}
           className="relative flex justify-center lg:justify-end order-1 lg:order-2"
         >
           <div className="relative">
@@ -126,7 +141,7 @@ export default function Profile() {
               />
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

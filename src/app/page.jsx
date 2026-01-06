@@ -7,6 +7,7 @@ import Hobbies from "@/components/Hobbies";
 import Profile from "@/components/Profile";
 
 import Projects from "@/components/Projects";
+import ScrollToTop from "@/components/Scroll";
 
 import Skill from "@/components/Skill";
 import CertificatesSection from "@/components/Testimonials ";
@@ -42,6 +43,7 @@ const Home = () => {
       </section>
 
       <Contact></Contact>
+      <ScrollToTop></ScrollToTop>
     </div>
   );
 };
