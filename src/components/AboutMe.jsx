@@ -7,132 +7,127 @@ export default function AboutMe() {
   return (
     <section
       id="about"
-      className="
-        relative
-        bg-[#0a0a0a]
-        overflow-hidden
-        py-24
-      "
+      className="relative bg-[#0a0a0a] overflow-hidden py-24 border-t border-white/5"
     >
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-pink-500/10 to-blue-400/5 pointer-events-none" />
-      <div className="absolute top-20 right-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse-slow" />
-      <div className="absolute bottom-20 left-10 w-72 h-72 bg-pink-500/20 rounded-full blur-3xl animate-pulse-slow" />
+      {/* Background Glows - Adjusted to match Hero Section */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-6">
         {/* SECTION TITLE */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <p className="text-sm tracking-widest text-purple-400 uppercase">
-            About Me
+          <p className="text-sm tracking-[0.3em] text-purple-400 uppercase font-bold">
+            Discovery
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-3">
-            Who I Am
+            About <span className="text-purple-400">Me</span>
           </h2>
+          <div className="w-20 h-1 bg-purple-500 mt-4 rounded-full" />
         </motion.div>
 
         {/* CONTENT GRID */}
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* LEFT TEXT */}
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          {/* LEFT TEXT (6 columns) */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="space-y-6 text-gray-300/80 leading-relaxed"
+            className="lg:col-span-7 space-y-6 text-gray-300 leading-relaxed text-lg"
           >
-            <p>
+            <p className="bg-white/5 p-6 rounded-2xl border border-white/5 backdrop-blur-sm">
               I am a{" "}
               <span className="text-purple-400 font-semibold">
                 Full-Stack Web Developer
               </span>{" "}
-              with around{" "}
+              with around
               <span className="text-white font-semibold">
+                {" "}
                 1 year of consistent learning and hands-on practice
               </span>
-              . During this journey, I’ve built a strong foundation in both
-              frontend and backend development.
+              . My journey is fueled by a passion for creating seamless digital
+              experiences that combine logic with aesthetics.
             </p>
 
-            <p>
-              I have completed{" "}
-              <span className="text-white font-semibold">
-                10–12 real-world projects
-              </span>
-              , where I worked with modern UI design, responsive layouts,
-              authentication systems, APIs, and scalable application structures.
-            </p>
+            <div className="space-y-4 px-2">
+              <p>
+                I have successfully delivered{" "}
+                <span className="text-white font-medium">10–12 projects</span>,
+                ranging from sleek frontend interfaces to complex full-stack
+                applications involving authentication, APIs, and database
+                management.
+              </p>
 
-            <p>
-              Currently, I am pursuing a{" "}
-              <span className="text-purple-400 font-semibold">
-                Diploma in Computer Science & Technology (CST)
-              </span>
-              , which helps strengthen my programming fundamentals and software
-              development concepts.
-            </p>
+              <p>
+                Currently, I am pursuing a{" "}
+                <span className="text-purple-400 font-medium">
+                  Diploma in Computer Science & Technology
+                </span>
+                , which provides me with a deep understanding of core
+                programming principles and system architecture.
+              </p>
 
-            <p>
-              My goal is to become a{" "}
-              <span className="text-white font-semibold">
-                reliable, skilled, and impact-driven developer
-              </span>
-              by continuously learning new technologies and building
-              production-ready applications.
-            </p>
+              <p className="italic text-gray-400">
+                "My goal is to build scalable, high-performance applications
+                that solve real-world problems."
+              </p>
+            </div>
           </motion.div>
 
-          {/* RIGHT CARDS */}
+          {/* RIGHT CARDS (5 columns) */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 gap-6"
+            className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
             {/* CARD 1 */}
-            <div className="p-6 rounded-2xl bg-[#111] border border-purple-400/20 shadow-lg hover:shadow-purple-500/20 transition">
-              <Code className="text-purple-400 mb-4" size={28} />
-              <h3 className="text-white font-semibold mb-1">Frontend</h3>
-              <p className="text-sm text-gray-400">
-                React, Next.js, Tailwind, UI/UX focused design
-              </p>
-            </div>
-
+            <AboutCard
+              icon={<Code size={24} />}
+              title="Frontend"
+              desc="Next.js, React, Tailwind CSS"
+            />
             {/* CARD 2 */}
-            <div className="p-6 rounded-2xl bg-[#111] border border-pink-400/20 shadow-lg hover:shadow-pink-500/20 transition">
-              <Layers className="text-pink-400 mb-4" size={28} />
-              <h3 className="text-white font-semibold mb-1">Backend</h3>
-              <p className="text-sm text-gray-400">
-                APIs, Authentication, CRUD, Database logic
-              </p>
-            </div>
-
+            <AboutCard
+              icon={<Layers size={24} />}
+              title="Backend"
+              desc="Node.js, Express, MongoDB"
+            />
             {/* CARD 3 */}
-            <div className="p-6 rounded-2xl bg-[#111] border border-blue-400/20 shadow-lg hover:shadow-blue-500/20 transition">
-              <GraduationCap className="text-blue-400 mb-4" size={28} />
-              <h3 className="text-white font-semibold mb-1">Education</h3>
-              <p className="text-sm text-gray-400">
-                Diploma in Computer Science & Technology (CST)
-              </p>
-            </div>
-
+            <AboutCard
+              icon={<GraduationCap size={24} />}
+              title="Education"
+              desc="Diploma in CST (Ongoing)"
+            />
             {/* CARD 4 */}
-            <div className="p-6 rounded-2xl bg-[#111] border border-purple-400/20 shadow-lg hover:shadow-purple-500/20 transition">
-              <Rocket className="text-purple-400 mb-4" size={28} />
-              <h3 className="text-white font-semibold mb-1">Goal</h3>
-              <p className="text-sm text-gray-400">
-                Build scalable, real-world web applications
-              </p>
-            </div>
+            <AboutCard
+              icon={<Rocket size={24} />}
+              title="Goal"
+              desc="Impact-driven Development"
+            />
           </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+// Reusable Card Component for cleaner code
+function AboutCard({ icon, title, desc }) {
+  return (
+    <div className="p-6 rounded-2xl bg-[#111111] border border-white/5 hover:border-purple-500/30 shadow-xl transition-all duration-300 group">
+      <div className="text-purple-400 mb-4 group-hover:scale-110 transition-transform duration-300">
+        {icon}
+      </div>
+      <h3 className="text-white font-bold mb-1">{title}</h3>
+      <p className="text-xs text-gray-400 leading-tight">{desc}</p>
+    </div>
   );
 }
