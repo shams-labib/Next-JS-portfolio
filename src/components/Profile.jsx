@@ -130,6 +130,7 @@ export default function Profile() {
           </div>
         </div>
 
+        {/* Hello Bangladesh */}
         {/* RIGHT SIDE (Empty spacer to keep image visible) */}
         <div
           ref={rightRef}
