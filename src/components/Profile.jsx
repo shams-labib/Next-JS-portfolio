@@ -34,7 +34,7 @@ export default function Profile() {
         opacity: 0,
         scale: 0.85,
       },
-      "-=0.6"
+      "-=0.6",
     );
 
     const typed = new Typed(el.current, {
