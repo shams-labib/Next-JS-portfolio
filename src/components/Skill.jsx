@@ -39,6 +39,7 @@ const Skill = () => {
         <h2 className="text-4xl md:text-5xl font-bold text-purple-400 text-center mb-12">
           Skills & Expertise
         </h2>
+        {/* Hello */}
 
         <div className="grid md:grid-cols-3 gap-10">
           {Object.entries(skillsData).map(([category, skills], idx) => {
@@ -46,8 +47,8 @@ const Skill = () => {
               category === "frontend"
                 ? Code
                 : category === "backend"
-                ? Server
-                : Terminal;
+                  ? Server
+                  : Terminal;
 
             return (
               <motion.div
