@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata = {
-  title: "Shams | Dark Portfolio",
-  description: "Dark-friendly portfolio page",
+  title: "Shams All Labib",
+  description: "Fronted Developer Portfolio",
 };
 
 export default function RootLayout({ children }) {
