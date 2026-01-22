@@ -96,7 +96,7 @@ export default function Profile() {
             <h1 className="animate-txt text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
               Hi, I'm <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-400 to-fuchsia-400">
-                SHAMS LABIB
+                SHAMS ALL LABIB
               </span>
             </h1>
 
