@@ -5,7 +5,6 @@ import {
   Mail,
   Linkedin,
   Facebook,
-  Instagram,
   Phone,
   MapPin,
   Send,
@@ -44,7 +43,7 @@ const Contact = () => {
         "service_vyedps4",
         "template_gu4xayn",
         formRef.current,
-        "qAo87EgVJLY4cIA-A"
+        "qAo87EgVJLY4cIA-A",
       )
       .then(
         () => {
@@ -52,7 +51,7 @@ const Contact = () => {
             icon: "success",
             title: "Message Sent!",
             text: "Your message has been sent successfully.",
-            confirmButtonColor: "#fb923c",
+            confirmButtonColor: "#a855f7",
           });
           formRef.current.reset();
         },
@@ -63,130 +62,87 @@ const Contact = () => {
             text: "Failed to send message. Please try again.",
             confirmButtonColor: "#ef4444",
           });
-        }
+        },
       );
   };
 
   return (
     <section
       id="contact"
-      className="relative py-28 bg-gradient-to-br from-[#0a0a0a] via-[#1b003d] to-[#0a0a0a] text-gray-100 overflow-hidden"
+      /* Background matches exactly with the Hobbies section above */
+      className="relative py-16 md:py-24 bg-[#0a0a0a] text-gray-100 overflow-hidden"
     >
-      {/* Background glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(120,40,255,0.2),transparent_60%)]"></div>
+      {/* BACKGROUND GLOWS - ধারাবাহিকতা বজায় রাখতে */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-purple-600/10 blur-[130px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-fuchsia-600/5 blur-[100px] rounded-full" />
+      </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {/* Heading */}
-        <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-purple-400">
-            Get In Touch
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+        {/* Section Header */}
+        <div className="mb-12 md:mb-16">
+          <p className="text-sm tracking-[0.3em] text-purple-400 uppercase font-bold mb-3">
+            Contact
+          </p>
+          <h2 className="text-3xl md:text-6xl font-black text-white tracking-tighter uppercase">
+            Get In <span className="text-purple-600">Touch</span>
           </h2>
-          <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+          <div className="h-1.5 w-20 bg-purple-600 rounded-full mt-4" />
+          <p className="mt-6 text-gray-400 max-w-lg">
             Have a project in mind or just want to chat? Let’s build something
             epic together.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
-          {/* LEFT INFO */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14">
+          {/* LEFT INFO SIDE */}
           <motion.div
-            className="space-y-8"
+            className="space-y-6"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
             {[
               {
-                icon: <Mail />,
+                icon: <Mail className="w-5 h-5" />,
                 title: "Email",
                 value: "shamsallabib@gmail.com",
               },
-              { icon: <Phone />, title: "Phone", value: "+880 1784768887" },
               {
-                icon: <MapPin />,
+                icon: <Phone className="w-5 h-5" />,
+                title: "Phone",
+                value: "+880 1784768887",
+              },
+              {
+                icon: <MapPin className="w-5 h-5" />,
                 title: "Location",
                 value: "Rangpur, Bangladesh",
               },
             ].map((item, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: i * 0.12,
-                  duration: 0.7,
-                  ease: "easeOut",
-                }}
-                viewport={{ once: true }}
-                whileHover={{ y: -4 }}
-                className="
-        group
-        relative
-        overflow-hidden
-        rounded-2xl
-        border
-        border-white/10
-        bg-gradient-to-br
-        from-white/[0.08]
-        to-white/[0.02]
-        backdrop-blur-xl
-        p-6
-        transition-all
-        duration-300
-        hover:border-purple-400/40
-        hover:shadow-lg
-        hover:shadow-purple-500/10
-      "
+                className="group relative flex items-center gap-5 p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md hover:border-purple-500/30 transition-all duration-300"
               >
-                {/* subtle glow */}
-                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition pointer-events-none bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.15),transparent_60%)]" />
-
-                <div className="relative flex items-center gap-5">
-                  {/* icon */}
-                  <div
-                    className="
-            grid
-            place-items-center
-            h-12
-            w-12
-            rounded-xl
-            bg-purple-400/15
-            text-purple-400
-            transition
-            group-hover:scale-110
-            group-hover:bg-purple-400/25
-          "
-                  >
-                    {item.icon}
-                  </div>
-
-                  {/* text */}
-                  <div className="flex-1">
-                    <p className="text-xs uppercase tracking-widest text-gray-400">
-                      {item.title}
-                    </p>
-                    <p className="mt-1 text-sm md:text-base font-semibold text-gray-100">
-                      {item.value}
-                    </p>
-                  </div>
+                <div className="h-12 w-12 rounded-xl bg-purple-500/10 text-purple-400 grid place-items-center group-hover:bg-purple-500/20 group-hover:scale-110 transition-all">
+                  {item.icon}
                 </div>
-              </motion.div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">
+                    {item.title}
+                  </p>
+                  <p className="text-sm md:text-base font-bold text-gray-200">
+                    {item.value}
+                  </p>
+                </div>
+              </div>
             ))}
 
-            {/* SOCIAL */}
-            <div className="pt-8 border-t border-white/10">
-              <p className="mb-4 text-sm uppercase tracking-widest text-gray-400">
+            {/* Social Icons */}
+            <div className="pt-6">
+              <p className="mb-4 text-xs uppercase tracking-widest text-gray-500 font-bold">
                 Connect With Me
               </p>
-
               <div className="flex gap-4">
                 {socialLinks.map((link, i) => (
                   <motion.a
@@ -194,25 +150,9 @@ const Contact = () => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ y: -3, scale: 1.12 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 260 }}
-                    className="
-            grid
-            place-items-center
-            h-11
-            w-11
-            rounded-xl
-            border
-            border-white/10
-            bg-white/5
-            backdrop-blur-md
-            text-gray-200
-            hover:text-purple-400
-            hover:border-purple-400/40
-            hover:bg-purple-400/10
-            transition-all
-          "
+                    whileHover={{ y: -5, scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="h-12 w-12 rounded-xl border border-white/10 bg-white/5 grid place-items-center text-gray-400 hover:text-purple-400 hover:border-purple-400/40 hover:bg-purple-400/10 transition-all shadow-lg"
                   >
                     {link.icon}
                   </motion.a>
@@ -221,134 +161,49 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* RIGHT FORM */}
+          {/* RIGHT FORM SIDE */}
           <motion.div
-            className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md"
+            className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 backdrop-blur-md shadow-2xl relative"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-              {/* NAME */}
-              <div className="relative group">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+              <div className="space-y-2">
                 <input
                   type="text"
                   name="user_name"
                   placeholder="Your Name"
                   required
-                  className="
-        w-full
-        rounded-xl
-        bg-white/5
-        px-4
-        py-3
-        text-gray-100
-        placeholder:text-gray-400/60
-        border
-        border-white/10
-        backdrop-blur-md
-
-        focus:outline-none
-        focus:border-purple-400/60
-        focus:bg-white/10
-        focus:ring-2
-        focus:ring-purple-400/20
-
-        transition-all
-        duration-300
-      "
+                  className="w-full rounded-xl bg-white/5 px-5 py-4 text-white border border-white/10 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 transition-all"
                 />
-                {/* glow */}
-                <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/5 group-focus-within:ring-purple-400/30 transition"></span>
               </div>
-
-              {/* EMAIL */}
-              <div className="relative group">
+              <div className="space-y-2">
                 <input
                   type="email"
                   name="user_email"
                   placeholder="Your Email"
                   required
-                  className="
-        w-full
-        rounded-xl
-        bg-white/5
-        px-4
-        py-3
-        text-gray-100
-        placeholder:text-gray-400/60
-        border
-        border-white/10
-        backdrop-blur-md
-
-        focus:outline-none
-        focus:border-purple-400/60
-        focus:bg-white/10
-        focus:ring-2
-        focus:ring-purple-400/20
-
-        transition-all
-        duration-300
-      "
+                  className="w-full rounded-xl bg-white/5 px-5 py-4 text-white border border-white/10 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 transition-all"
                 />
-                <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/5 group-focus-within:ring-purple-400/30 transition"></span>
               </div>
-
-              {/* MESSAGE */}
-              <div className="relative group">
+              <div className="space-y-2">
                 <textarea
                   name="message"
-                  rows={5}
+                  rows={4}
                   placeholder="Your Message"
                   required
-                  className="
-        w-full
-        rounded-xl
-        bg-white/5
-        px-4
-        py-3
-        text-gray-100
-        placeholder:text-gray-400/60
-        border
-        border-white/10
-        backdrop-blur-md
-        resize-none
-
-        focus:outline-none
-        focus:border-purple-400/60
-        focus:bg-white/10
-        focus:ring-2
-        focus:ring-purple-400/20
-
-        transition-all
-        duration-300
-      "
+                  className="w-full rounded-xl bg-white/5 px-5 py-4 text-white border border-white/10 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 transition-all resize-none"
                 />
-                <span className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-white/5 group-focus-within:ring-purple-400/30 transition"></span>
               </div>
 
-              {/* BUTTON */}
               <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 220 }}
-                className="
-      btn
-      w-full
-      rounded-xl
-      bg-gradient-to-r
-      from-purple-500
-      to-pink-500
-      text-black
-      font-semibold
-      shadow-lg
-      shadow-purple-500/30
-      hover:shadow-purple-500/60
-      transition-all
-    "
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white font-bold text-lg flex items-center justify-center gap-3 shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 transition-all"
               >
-                <Send className="w-4 h-4 mr-2" />
+                <Send size={20} />
                 Send Message
               </motion.button>
             </form>

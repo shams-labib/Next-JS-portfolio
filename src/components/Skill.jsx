@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Code, Server, Terminal, Zap, Database } from "lucide-react";
+import { Code, Server, Terminal } from "lucide-react";
 import { motion } from "framer-motion";
 
 const skillsData = {
@@ -29,19 +29,34 @@ const Skill = () => {
   return (
     <section
       id="skills"
-      className="relative py-20 bg-gradient-to-br from-[#0a0a0a] via-[#1b003d] to-[#0a0a0a] text-gray-100 overflow-hidden"
+      /* Background matches exactly with the Projects section above */
+      className="relative py-16 md:py-24 bg-[#0a0a0a] text-gray-100 overflow-hidden"
     >
-      {/* Floating background shapes */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-purple-400 opacity-10 rounded-full animate-pulse blur-3xl"></div>
-      <div className="absolute bottom-20 right-20 w-40 h-40 bg-pink-500 opacity-10 rounded-full animate-pulse blur-3xl"></div>
+      {/* BACKGROUND GLOWS (Your requested style) */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-purple-600/10 blur-[130px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-fuchsia-600/5 blur-[100px] rounded-full" />
+      </div>
 
-      <div className="container mx-auto px-4 md:px-20">
-        <h2 className="text-4xl md:text-5xl font-bold text-purple-400 text-center mb-12">
-          Skills & Expertise
-        </h2>
-        {/* Hello */}
+      {/* Small Floating background shapes */}
+      <div className="absolute top-10 left-10 w-32 h-32 bg-purple-400 opacity-10 rounded-full animate-pulse blur-3xl z-0"></div>
+      <div className="absolute bottom-20 right-20 w-40 h-40 bg-pink-500 opacity-10 rounded-full animate-pulse blur-3xl z-0"></div>
 
-        <div className="grid md:grid-cols-3 gap-10">
+      {/* Main Content Container - set to max-w-7xl for perfect alignment */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+        {/* Section Header - Styled like About/Projects */}
+        <div className="mb-10 md:mb-16">
+          <p className="text-sm tracking-[0.3em] text-purple-400 uppercase font-bold mb-3">
+            Expertise
+          </p>
+          <h2 className="text-3xl md:text-6xl font-black text-white tracking-tighter uppercase">
+            Skills & <span className="text-purple-600">Knowledge</span>
+          </h2>
+          <div className="h-1.5 w-20 bg-purple-600 rounded-full mt-4" />
+        </div>
+
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
           {Object.entries(skillsData).map(([category, skills], idx) => {
             const Icon =
               category === "frontend"
@@ -53,32 +68,40 @@ const Skill = () => {
             return (
               <motion.div
                 key={idx}
-                className="bg-white/5 p-6 rounded-2xl shadow-lg backdrop-blur-md hover:shadow-2xl transition-shadow duration-300 border border-white/10"
-                initial={{ y: 50, opacity: 0 }}
+                /* Card design aligned with ProjectCard style */
+                className="bg-white/[0.02] p-6 md:p-8 rounded-2xl border border-white/10 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 group shadow-xl"
+                initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.2 }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
               >
-                <div className="flex items-center mb-4 space-x-2">
-                  <Icon className="w-6 h-6 text-purple-400 animate-pulse hover:animate-spin" />
-                  <h3 className="text-2xl font-semibold capitalize text-purple-400">
+                <div className="flex items-center mb-6 space-x-3">
+                  <div className="p-2 bg-purple-500/10 rounded-lg">
+                    <Icon className="w-5 h-5 md:w-6 md:h-6 text-purple-400" />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-bold capitalize text-white tracking-wide">
                     {category}
                   </h3>
                 </div>
-                <div className="space-y-3">
+
+                <div className="space-y-5">
                   {skills.map((skill) => (
                     <div key={skill.name}>
-                      <div className="flex justify-between mb-1 text-gray-300">
-                        <span>{skill.name}</span>
-                        <span>{skill.level}%</span>
+                      <div className="flex justify-between mb-2 text-gray-400">
+                        <span className="text-xs md:text-sm font-medium">
+                          {skill.name}
+                        </span>
+                        <span className="text-[10px] md:text-xs text-purple-400 font-bold">
+                          {skill.level}%
+                        </span>
                       </div>
-                      <div className="w-full bg-gray-700 h-2 rounded-full">
+                      <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden border border-white/5">
                         <motion.div
-                          className="bg-purple-400 h-2 rounded-full"
+                          className="bg-purple-600 h-full rounded-full shadow-[0_0_10px_rgba(147,51,234,0.5)]"
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true }}
-                          transition={{ duration: 1.2 }}
+                          transition={{ duration: 1.5, ease: "easeOut" }}
                         ></motion.div>
                       </div>
                     </div>
