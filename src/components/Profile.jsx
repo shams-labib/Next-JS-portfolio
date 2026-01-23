@@ -85,6 +85,7 @@ export default function Profile() {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
         {/* LEFT CONTENT */}
+        {/* Main mal */}
         <div className="space-y-8 order-2 lg:order-1 text-center lg:text-left">
           <div className="animate-txt">
             <span className="px-4 py-2 rounded-full border border-purple-400/20 bg-purple-500/5 text-purple-300 text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-sm">
