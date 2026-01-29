@@ -169,6 +169,7 @@ export default function Profile() {
                 </div>
               </div>
               {/* Modified for commit */}
+              {/* Modified */}
 
               <div className="absolute top-[10%] -right-2 bg-[#1a0b2e]/90 backdrop-blur-md border border-emerald-500/30 px-3 py-1.5 md:px-4 md:py-2 rounded-full flex items-center gap-2 shadow-2xl">
                 <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
