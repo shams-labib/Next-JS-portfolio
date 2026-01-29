@@ -146,7 +146,6 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* RIGHT IMAGE SECTION */}
         <div
           ref={rightRef}
           className="flex justify-center lg:justify-end order-1 lg:order-2"
