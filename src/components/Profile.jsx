@@ -126,7 +126,7 @@ export default function Profile() {
                 Get Resume
               </span>
             </a>
-            {/* Joy Bangla */}
+
             <div className="flex gap-3">
               {SOCIAL_LINKS.map((social, i) => (
                 <a
